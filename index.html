@@ -1,45 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>shpawk's Projects</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>kLub | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #1e1e2e; /* Catppuccin Mocha base */
-      color: #f5e0dc;
-      font-family: 'Fira Mono', monospace;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    h1 {
-      font-size: 2.5em;
-      color: #ff9500; /* neon orange text */
-      text-shadow:
-        0 0 5px #ff9500,
-        0 0 10px #ff9500,
-        0 0 20px #ff9500,
-        0 0 40px #9b59b6, /* neon purple glow */
-        0 0 60px #9b59b6,
-        0 0 80px #9b59b6;
-      animation: flicker 2s infinite alternate;
-    }
-
-    @keyframes flicker {
-      0% { opacity: 1; }
-      50% { opacity: 0.8; }
-      100% { opacity: 1; }
+    #grid-bg {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
     }
   </style>
 </head>
 <body>
-  <h1>Hello World!</h1>
+
+  <canvas id="grid-bg"></canvas>
+
+  <header>
+    <h1>kLub</h1>
+    <p>Creative Developer & Designer</p>
+  </header>
+
+  <section class="about">
+    <h2>About Me</h2>
+    <p>I'm learning to code and build beautiful, functional digital experiences. I enjoy blending logic with creativity.</p>
+  </section>
+
+  <section class="projects">
+    <h2>Projects</h2>
+    <div class="card">
+      <h3>Python Calculator</h3>
+      <p>A simple calculator made in Python — my first project!</p>
+    </div>
+
+      <div class="card">
+    <h3>Messenger App (WIP)</h3>
+    <p>I'm building a command-line messenger using Python — it’ll be like a retro IRC chat, just cooler. Stay tuned!</p>
+  </div>
+
+    <div class="card">
+      <h3>Coming Soon</h3>
+      <p>More projects on the way as I keep learning!</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Let's connect — <a href="#">@yourhandle</a></p>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('grid-bg');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    let offset = 0;
+    function drawGrid() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)';
+      ctx.lineWidth = 1;
+
+      let spacing = 40;
+      offset += 0.5;
+
+      for (let y = canvas.height; y > canvas.height / 2; y -= spacing) {
+        ctx.beginPath();
+        ctx.moveTo(0, y + offset % spacing);
+        ctx.lineTo(canvas.width, y + offset % spacing);
+        ctx.stroke();
+      }
+
+      let centerY = canvas.height;
+      let centerX = canvas.width / 2;
+      for (let x = -canvas.width; x < canvas.width * 2; x += spacing) {
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x, canvas.height / 2);
+        ctx.stroke();
+      }
+
+      requestAnimationFrame(drawGrid);
+    }
+    drawGrid();
+  </script>
+
 </body>
 </html>
