@@ -58,6 +58,7 @@ section {
     transition: transform 0.3s ease;
     box-shadow: 0 0 10px #ff00cc55;
     max-width: 700px;
+    position: relative;
 }
 
 .projects .card:hover {
@@ -79,4 +80,37 @@ a {
 
 a:hover {
     text-shadow: 0 0 10px #00eaff;
+}
+
+/* Project Preview Styling */
+
+.project {
+    position: relative;
+}
+
+.preview-container {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.project:hover .preview-container {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.preview-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ff66cc;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
